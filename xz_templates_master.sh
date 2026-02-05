@@ -3,25 +3,12 @@ set -e
 
 echo "=== xZ-TEMPLATES-MASTER ==="
 
-###############################################
-# 1) CREAZIONE STRUTTURA
-###############################################
 echo "[1/7] Creo cartelle templates/ e pages/..."
+mkdir -p templates pages backups
 
-mkdir -p templates
-mkdir -p pages
-mkdir -p backups
-
-###############################################
-# 2) BACKUP FILE ATTUALI
-###############################################
 echo "[2/7] Backup file esistenti..."
-
 cp -f index.html backups/index_$(date +%s).bak || true
 
-###############################################
-# 3) GENERAZIONE TEMPLATE MODULARI
-###############################################
 echo "[3/7] Genero template modulari..."
 
 cat > templates/header.html << 'EOF'
@@ -67,9 +54,6 @@ cat > templates/admin.html << 'EOF'
 </section>
 EOF
 
-###############################################
-# 4) TEMPLATE BASE
-###############################################
 echo "[4/7] Genero base template..."
 
 cat > templates/base.html << 'EOF'
@@ -97,10 +81,7 @@ cat > templates/base.html << 'EOF'
 </html>
 EOF
 
-###############################################
-# 5) GENERAZIONE PAGINE
-###############################################
-echo "[5/7] Genero pagine modulari..."
+echo "[5/7] Genero pagine..."
 
 cat > pages/index.html << 'EOF'
 ---
@@ -121,9 +102,6 @@ title: Admin Panel
 {% include admin.html %}
 EOF
 
-###############################################
-# 6) SOSTITUZIONE INDEX PRINCIPALE
-###############################################
 echo "[6/7] Aggiorno index.html principale..."
 
 cat > index.html << 'EOF'
@@ -136,9 +114,6 @@ title: xZDOS Enterprise Platform
 {% include terminal.html %}
 EOF
 
-###############################################
-# 7) COMMIT + PUSH + REBUILD
-###############################################
 echo "[7/7] Commit, push e rebuild..."
 
 git add .
