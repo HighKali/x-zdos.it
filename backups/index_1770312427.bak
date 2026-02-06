@@ -1,7 +1,0 @@
----
-layout: base
-title: xZDOS Enterprise Platform
----
-
-{% include oracle.html %}
-{% include terminal.html %}
