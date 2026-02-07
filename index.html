@@ -1,492 +1,672 @@
+`html
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>xZDOS · Sistema Centrale</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="xZDOS — ecosistema modulare con supervisione quantistica. Highkali: Master Bounty Bug Auditor." />
 
   <style>
+    :root{
+      --bg:#050505;
+      --panel:#0f0f0f;
+      --accent:#00eaff;
+      --muted:#9aa6b2;
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    html,body{height:100%}
     body {
       margin: 0;
       padding: 0;
-      background: #050505;
-      color: #e6e6e6;
-      font-family: "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, #071018 0%, transparent 10%), var(--bg);
+      color: #e6eef2;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
 
     header {
-      padding: 60px 20px;
+      padding: 56px 20px 36px;
       text-align: center;
-      background: linear-gradient(135deg, #0a0a0a, #111);
-      border-bottom: 1px solid #222;
+      background: linear-gradient(180deg, rgba(0,0,0,0.25), transparent);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(4px);
     }
 
     h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       margin: 0;
-      letter-spacing: 3px;
-      color: #00eaff;
-      text-shadow: 0 0 15px #00eaff55;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(0,234,255,0.12);
+      font-weight:700;
     }
 
-    p.subtitle {
-      margin-top: 15px;
-      font-size: 1.3rem;
-      opacity: 0.8;
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      color: #cfeff6;
+      opacity: 0.9;
+    }
+
+    .subsecondary {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #bfefff;
+      opacity: 0.95;
+      font-weight:600;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 20px;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px 80px;
     }
 
     .section-title {
-      font-size: 2rem;
-      margin: 40px 0 20px;
-      color: #00eaff;
-      border-left: 4px solid #00eaff;
+      font-size: 1.6rem;
+      margin: 36px 0 14px;
+      color: var(--accent);
+      border-left: 4px solid rgba(0,234,255,0.12);
       padding-left: 12px;
+      font-weight:600;
     }
 
     .section-text {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      opacity: 0.9;
-      margin-bottom: 30px;
+      font-size: 1rem;
+      color: #dbeff4;
+      opacity: 0.95;
+      margin-bottom: 18px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
     .card {
-      background: #0f0f0f;
-      padding: 25px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border: 1px solid rgba(255,255,255,0.03);
+      padding: 18px;
       border-radius: 12px;
-      border: 1px solid #1f1f1f;
-      transition: 0.3s;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      transition: transform .22s ease, box-shadow .22s ease;
     }
 
-    .card:hover {
+    .card:hover{
       transform: translateY(-6px);
-      border-color: #00eaff;
-      box-shadow: 0 0 20px #00eaff33;
+      box-shadow: 0 18px 40px rgba(0,234,255,0.06);
+      border-color: rgba(0,234,255,0.12);
     }
 
     .card h3 {
-      margin-top: 0;
-      color: #00eaff;
-      font-size: 1.4rem;
+      margin: 0 0 8px 0;
+      color: var(--accent);
+      font-size: 1.1rem;
     }
+
+    .muted { color: var(--muted); font-size:0.95rem; }
 
     .button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 18px;
-      background: #00eaff22;
-      border: 1px solid #00eaff55;
-      border-radius: 8px;
-      color: #00eaff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .button:hover {
-      background: #00eaff44;
-      border-color: #00eaff;
+      display:inline-block;
+      margin-top:12px;
+      padding:8px 14px;
+      border-radius:8px;
+      color:var(--accent);
+      background: rgba(0,234,255,0.04);
+      border:1px solid rgba(0,234,255,0.08);
+      text-decoration:none;
+      font-weight:600;
+      font-size:0.95rem;
     }
 
     footer {
-      margin-top: 80px;
-      padding: 30px;
+      margin-top: 60px;
+      padding: 28px 20px;
       text-align: center;
       font-size: 0.9rem;
-      opacity: 0.6;
-      border-top: 1px solid #222;
+      color: #bcdfe8;
+      opacity: 0.7;
+      border-top: 1px solid rgba(255,255,255,0.02);
     }
 
     .timeline {
-      border-left: 2px solid #00eaff55;
-      margin: 40px 0;
-      padding-left: 20px;
+      border-left: 2px solid rgba(0,234,255,0.06);
+      margin: 18px 0 30px;
+      padding-left: 18px;
     }
 
-    .timeline-entry {
-      margin-bottom: 25px;
+    .timeline-entry { margin-bottom: 18px; }
+    .timeline-entry h4 { margin:0; color:var(--accent); font-size:1rem; }
+    .timeline-entry p { margin:6px 0 0; color:#d8eef6; opacity:0.9; }
+
+    / Terminal /
+    #terminal {
+      background: linear-gradient(180deg, #000000, #050505);
+      color: var(--accent);
+      padding:18px;
+      border-radius:12px;
+      font-family: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+      height:360px;
+      overflow-y:auto;
+      border:1px solid rgba(0,234,255,0.06);
+      box-shadow: 0 8px 30px rgba(0,234,255,0.04);
+      white-space:pre-wrap;
+      font-size:0.95rem;
     }
 
-    .timeline-entry h4 {
-      margin: 0;
-      color: #00eaff;
+    #terminal-output a { color: #7fe9ff; text-decoration: underline; }
+
+    #terminal-input {
+      width:100%;
+      padding:12px 14px;
+      margin-top:12px;
+      background: rgba(255,255,255,0.01);
+      border:1px solid rgba(255,255,255,0.03);
+      border-radius:10px;
+      color:var(--accent);
+      font-family: inherit;
+      font-size:0.98rem;
+      outline:none;
     }
 
-    .timeline-entry p {
-      margin: 5px 0 0;
-      opacity: 0.85;
+    code.inline { background: rgba(255,255,255,0.02); padding:2px 6px; border-radius:6px; color:#dff9ff; }
+
+    .axiom-list { margin-top:12px; padding:12px; background:var(--glass); border-radius:10px; border:1px solid rgba(255,255,255,0.02); }
+
+    @media (max-width:640px){
+      h1{font-size:2.4rem}
+      #terminal{height:260px}
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <h1>xZDOS</h1>
-  <p class="subtitle">Sistema centrale · Architettura modulare · Intelligenza distribuita</p>
-</header>
+  <header>
+    <h1>xZDOS</h1>
+    <div class="subtitle">Sistema centrale · Architettura modulare · Intelligenza distribuita</div>
+    <div class="subsecondary">Highkali · Master Bounty Bug Auditor dell’Ecosistema xZDOS</div>
+  </header>
 
-<div class="container">
+  <main class="container">
 
-  <!-- Agente xZDOS -->
-  <h2 class="section-title">Agente xZDOS</h2>
-  <p class="section-text">
-    L’agente xZDOS è il nucleo dell’intero ecosistema.
-    Coordina, osserva, registra e mantiene la coerenza del sistema.
-    È il punto di accesso principale, la mente che collega tutti i moduli e supervisiona l’evoluzione dell’infrastruttura.
-    xZDOS non è un semplice modulo: è l’identità del sistema, il suo centro di gravità.
-  </p>
+    <!-- Agente xZDOS -->
+    <section aria-labelledby="agente">
+      <h2 id="agente" class="section-title">Agente xZDOS</h2>
+      <p class="section-text">
+        L’agente xZDOS è il nucleo concettuale e operativo dell’ecosistema. Coordina i moduli, mantiene coerenza di stato e fornisce un’interfaccia unificata per osservazione, controllo e progettazione.
+        xZDOS è pensato come un kernel concettuale che espone operatori, osservatori e policy per sistemi complessi distribuiti.
+      </p>
 
-  <div class="card">
-    <h3>Funzioni principali dell’agente xZDOS</h3>
-    <p>• Coordinamento globale dei moduli</p>
-    <p>• Supervisione dello stato operativo</p>
-    <p>• Gestione identità e struttura dell’ecosistema</p>
-    <p>• Punto di accesso per moduli esterni</p>
-    <p>• Visione unificata del sistema</p>
-  </div>
+      <div class="card">
+        <h3>Funzioni principali</h3>
+        <p class="muted">Coordinamento globale; supervisione moduli; gestione identità; osservabilità e policy enforcement.</p>
+      </div>
+    </section>
 
-  <!-- Moduli -->
-  <h2 class="section-title">Moduli dell’Ecosistema</h2>
+    <!-- Moduli -->
+    <section aria-labelledby="moduli">
+      <h2 id="moduli" class="section-title">Moduli dell’Ecosistema</h2>
 
-  <div class="grid">
+      <div class="grid">
+        <div class="card">
+          <h3>Dr. High‑berzek</h3>
+          <p class="muted">Orchestratore strategico: analisi, piani, memoria persistente, policy evolution.</p>
+        </div>
 
-    <div class="card">
-      <h3>Dr. High‑berzek</h3>
-      <p>Orchestratore strategico. Analisi, piani, stato operativo, memoria persistente.</p>
-    </div>
+        <div class="card">
+          <h3>SENTINEL</h3>
+          <p class="muted">Esecutore e controllo: applica piani, gestisce errori, attiva auto‑riparazione e rollback.</p>
+        </div>
 
-    <div class="card">
-      <h3>SENTINEL</h3>
-      <p>Modulo esecutivo. Applica piani, gestisce errori, attiva auto‑riparazione.</p>
-    </div>
+        <div class="card">
+          <h3>RZAI‑pulciz</h3>
+          <p class="muted">Validatore: integrità, sicurezza, coerenza strutturale e controllo delle dipendenze.</p>
+        </div>
 
-    <div class="card">
-      <h3>RZAI‑pulciz</h3>
-      <p>Validatore. Controllo integrità, sicurezza, coerenza strutturale.</p>
-    </div>
+        <div class="card">
+          <h3>xZDOS Wallet</h3>
+          <p class="muted">Gestione credenziali e risorse economiche dell’ecosistema.</p>
+          <a class="button" href="https://wallet.x-zdos.it" target="_blank" rel="noopener">Apri wallet</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h3>xZDOS Wallet</h3>
-      <p>Modulo dedicato alla gestione wallet.</p>
-      <a class="button" href="https://wallet.x-zdos.it">Apri wallet</a>
-    </div>
+    <!-- xCLOUD -->
+    <section aria-labelledby="xcloud">
+      <h2 id="xcloud" class="section-title">xCLOUD · Modulo Cloud</h2>
+      <p class="section-text">
+        xCLOUD è il layer di spazio‑stato distribuito: storage, sincronizzazione, replica e astrazione delle risorse remote. Progettato per resilienza, osservabilità e governance.
+      </p>
 
-  </div>
+      <div class="card">
+        <h3>Repository e sviluppo</h3>
+        <p class="muted">Logica cloud, moduli remoti e estensioni per orchestrazione distribuita.</p>
+        <a class="button" href="https://github.com/high-cde/xCLOUD-by-zdos" target="_blank" rel="noopener">Apri xCLOUD su GitHub</a>
+      </div>
+    </section>
 
-  <!-- xCLOUD -->
-  <h2 class="section-title">xCLOUD · Modulo Cloud dell’Ecosistema</h2>
-  <p class="section-text">
-    xCLOUD è il modulo cloud‑native dell’ecosistema xZDOS.
-    Raccoglie, struttura e gestisce risorse distribuite, offrendo un livello superiore di astrazione e potenza.
-  </p>
+    <!-- Discord -->
+    <section aria-labelledby="discord">
+      <h2 id="discord" class="section-title">Server Discord Ufficiale</h2>
+      <p class="section-text">
+        Centro comunicativo per aggiornamenti, coordinamento e discussioni tecniche. Canali dedicati per audit, sviluppo e bounty.
+      </p>
 
-  <div class="card">
-    <h3>Repository ufficiale xCLOUD</h3>
-    <p>Contiene la logica cloud, i moduli remoti e le estensioni future.</p>
-    <a class="button" href="https://github.com/high-cde/xCLOUD-by-zdos">Apri xCLOUD su GitHub</a>
-  </div>
+      <div class="card">
+        <h3>Community</h3>
+        <p class="muted">Discussioni tecniche, report di vulnerabilità, canali per bounty e coordinamento operativo.</p>
+        <a class="button" href="https://discord.gg/9fDdURTevG" target="_blank" rel="noopener">Entra nel server Discord</a>
+      </div>
+    </section>
 
-  <!-- Discord -->
-  <h2 class="section-title">Server Discord Ufficiale</h2>
-  <p class="section-text">
-    Il centro comunicativo dell’ecosistema.
-    Qui avvengono discussioni, aggiornamenti, test e coordinamento.
-  </p>
+    <!-- Timeline -->
+    <section aria-labelledby="timeline">
+      <h2 id="timeline" class="section-title">Timeline Evolutiva</h2>
 
-  <div class="card">
-    <h3>Unisciti alla community</h3>
-    <p>Accesso diretto al server ufficiale xZDOS.</p>
-    <a class="button" href="https://discord.gg/9fDdURTevG">Entra nel server Discord</a>
-  </div>
+      <div class="timeline">
+        <div class="timeline-entry">
+          <h4>Fase 1 — Fondazione</h4>
+          <p>Definizione dell’identità xZDOS e creazione dei repository base.</p>
+        </div>
 
-  <!-- Timeline -->
-  <h2 class="section-title">Timeline Evolutiva</h2>
+        <div class="timeline-entry">
+          <h4>Fase 2 — Orchestratore</h4>
+          <p>Nascita di Dr. High‑berzek e prime policy di governance.</p>
+        </div>
 
-  <div class="timeline">
+        <div class="timeline-entry">
+          <h4>Fase 3 — Supervisione</h4>
+          <p>Integrazione di SENTINEL e RZAI‑pulciz per controllo e validazione.</p>
+        </div>
 
-    <div class="timeline-entry">
-      <h4>Fase 1 — Fondazione</h4>
-      <p>Creazione dei repository base e definizione dell’identità xZDOS.</p>
-    </div>
+        <div class="timeline-entry">
+          <h4>Fase 4 — Espansione</h4>
+          <p>Creazione di xCLOUD e servizi remoti; introduzione di Highkali come funzione di sicurezza avanzata.</p>
+        </div>
 
-    <div class="timeline-entry">
-      <h4>Fase 2 — Orchestratore</h4>
-      <p>Nascita di Dr. High‑berzek con stato persistente e mood operativo.</p>
-    </div>
+        <div class="timeline-entry">
+          <h4>Fase 5 — Identità</h4>
+          <p>Consolidamento dell’agente xZDOS come kernel concettuale e operativo.</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="timeline-entry">
-      <h4>Fase 3 — Supervisione</h4>
-      <p>Integrazione di SENTINEL e RZAI‑pulciz.</p>
-    </div>
+    <!-- Highkali Section -->
+    <section aria-labelledby="highkali">
+      <h2 id="highkali" class="section-title">Highkali · Master Bounty Bug Auditor</h2>
 
-    <div class="timeline-entry">
-      <h4>Fase 4 — Espansione</h4>
-      <p>Creazione di xCLOUD e wallet.x-zdos.it.</p>
-    </div>
+      <div class="card">
+        <h3>Identità ibrida e ruolo</h3>
+        <p class="section-text">
+          Highkali è un’entità ibrida integrata nell’ecosistema xZDOS: simultaneamente <strong>persona tecnica</strong>, <strong>modulo interno</strong> e <strong>agente operativo</strong>. Opera con un approccio scientifico ed educativo, finalizzato a migliorare la sicurezza, la resilienza e la conoscenza del sistema.
+        </p>
 
-    <div class="timeline-entry">
-      <h4>Fase 5 — Identità</h4>
-      <p>Introduzione dell’agente xZDOS come centro dell’ecosistema.</p>
-    </div>
+        <div class="axiom-list">
+          <strong>Principi operativi</strong>
+          <ul style="margin:8px 0 0 18px; color:#dff9ff;">
+            <li><strong>Osservare senza interrompere</strong> — misurare stati e pattern con impatto minimo.</li>
+            <li><strong>Conoscenza condivisa</strong> — ogni audit restituisce insight e raccomandazioni.</li>
+            <li><strong>Validazione continua</strong> — test, correlazione e verifica automatica.</li>
+            <li><strong>Etica del bounty</strong> — gestione responsabile delle vulnerabilità e ricompense trasparenti.</li>
+          </ul>
+        </div>
 
-  </div>
+        <h3 style="margin-top:14px">Funzioni principali</h3>
+        <p class="muted">
+          Analisi delle superfici d’attacco; audit continuo dei moduli; rilevamento e correlazione di anomalie; threat modeling; valutazione del rischio; definizione e aggiornamento degli assiomi di sicurezza.
+        </p>
 
-  <!-- TERMINALE INTERATTIVO xZDOS -->
-  <h2 class="section-title">Terminale Interattivo xZDOS</h2>
-  <p class="section-text">
-    Interfaccia diretta con l’agente xZDOS.  
-    Digita <code>help</code> per i comandi disponibili.  
-    Esiste anche una modalità <strong>root</strong> nascosta.
-  </p>
+        <h3 style="margin-top:12px">Modello concettuale</h3>
+        <p class="section-text">
+          Highkali opera come osservatore quantistico: misura lo stato del sistema, interpreta segnali e variazioni entropiche, e propone interventi. Le sue analisi sono progettate per essere riproducibili, spiegabili e didattiche: ogni output è accompagnato da contesto tecnico e raccomandazioni operative.
+        </p>
+      </div>
+    </section>
 
-  <div id="terminal" style="
-    background:#000;
-    color:#00eaff;
-    padding:20px;
-    border-radius:10px;
-    font-family: monospace;
-    height:300px;
-    overflow-y:auto;
-    border:1px solid #00eaff55;
-    box-shadow:0 0 15px #00eaff33;
-  ">
-    <div id="terminal-output">xZDOS> Terminale inizializzato. Digita 'help' per i comandi disponibili.</div>
-  </div>
+    <!-- Terminale Interattivo -->
+    <section aria-labelledby="terminale">
+      <h2 id="terminale" class="section-title">Terminale Interattivo xZDOS</h2>
+      <p class="section-text">
+        Interfaccia diretta con l’agente xZDOS e con Highkali. Tono educativo: i comandi restituiscono spiegazioni tecniche oltre agli output. Digita <code>help</code> per iniziare.
+      </p>
 
-  <input id="terminal-input" type="text" placeholder="Inserisci comando..."
-  style="
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    background:#0a0a0a;
-    border:1px solid #00eaff55;
-    border-radius:8px;
-    color:#00eaff;
-    font-family:monospace;
-    outline:none;
-  ">
+      <div id="terminal" role="log" aria-live="polite">
+        <div id="terminal-output">xZDOS> Terminale inizializzato. Digita 'help' per i comandi disponibili.</div>
+      </div>
 
-</div>
+      <input id="terminal-input" type="text" placeholder="Inserisci comando..." aria-label="Terminal input" />
+    </section>
 
-<footer>
-  © xZDOS · Sistema modulare · Architettura distribuita · Evoluzione continua
-</footer>
+  </main>
 
-<script>
-  const output = document.getElementById("terminal-output");
-  const input = document.getElementById("terminal-input");
-  const terminal = document.getElementById("terminal");
+  <footer>
+    © xZDOS · Ecosistema modulare · Supervisione quantistica · Highkali (Master Bounty Bug Auditor)
+  </footer>
 
-  let isRoot = false;
+  <script>
+    (function(){
+      const output = document.getElementById("terminal-output");
+      const input = document.getElementById("terminal-input");
+      const terminal = document.getElementById("terminal");
 
-  function print(text) {
-    output.innerHTML += "<br>" + text;
-    terminal.scrollTop = terminal.scrollHeight;
-  }
+      let isRoot = false;
+      let highkaliMode = true; // Highkali integrato come agente attivo
 
-  function delayPrint(lines, delay = 200) {
-    let i = 0;
-    const interval = setInterval(() => {
-      print(lines[i]);
-      i++;
-      if (i >= lines.length) clearInterval(interval);
-    }, delay);
-  }
+      function safePrint(html){
+        output.innerHTML += "<br>" + html;
+        terminal.scrollTop = terminal.scrollHeight;
+      }
 
-  input.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-      const raw = input.value;
-      const cmd = raw.trim();
-      if (!cmd) return;
-      print((isRoot ? "xZDOS# " : "xZDOS> ") + cmd);
-      input.value = "";
+      function clearTerminal(){
+        output.innerHTML = "xZDOS> Terminale pulito.";
+      }
 
-      const lower = cmd.toLowerCase();
+      function delayPrint(lines, delay = 180, onDone){
+        let i = 0;
+        const id = setInterval(() => {
+          safePrint(lines[i]);
+          i++;
+          if(i >= lines.length){
+            clearInterval(id);
+            if(typeof onDone === "function") onDone();
+          }
+        }, delay);
+      }
 
-      // Modalità ROOT: comandi speciali
-      if (isRoot) {
-        switch(lower) {
+      function explain(prefix, text){
+        safePrint("<strong style='color:#bffeff'>" + prefix + "</strong> — " + text);
+      }
+
+      // Helper: simulate a technical audit summary
+      function auditSummary(depth){
+        const base = [
+          "Inizio audit: raccolta metadati...",
+          "Analisi dipendenze e surface mapping...",
+          "Controllo configurazioni note...",
+          "Esecuzione test di integrità sui moduli...",
+        ];
+        if(depth === "deep"){
+          base.push("Esecuzione fuzzing simulato su endpoint critici...");
+          base.push("Analisi correlata eventi: pattern anomalo non rilevato.");
+          base.push("Raccomandazioni: rafforzare input validation; abilitare rate limiting; review policy di accesso.");
+        } else {
+          base.push("Controllo rapido completato: nessuna anomalia critica rilevata.");
+          base.push("Raccomandazioni: pianificare audit approfondito se cambi di configurazione recenti.");
+        }
+        return base;
+      }
+
+      // Terminal commands
+      input.addEventListener("keydown", function(e){
+        if(e.key !== "Enter") return;
+        const raw = input.value || "";
+        const cmd = raw.trim();
+        if(!cmd) return;
+        safePrint((isRoot ? "xZDOS# " : "xZDOS> ") + cmd);
+        input.value = "";
+
+        const lower = cmd.toLowerCase();
+
+        // Root mode commands
+        if(isRoot){
+          switch(lower){
+            case "help":
+              safePrint("Comandi ROOT (Highkali):");
+              safePrint("- help : mostra comandi root");
+              safePrint("- stato : stato avanzato moduli e metriche");
+              safePrint("- reboot system : riavvio logico simulato");
+              safePrint("- unlock modules : sblocco moduli simulato");
+              safePrint("- audit deep : esegui audit approfondito (root)");
+              safePrint("- exit : esci dalla modalità root");
+              break;
+
+            case "stato":
+              delayPrint([
+                "[ROOT] Stato avanzato moduli:",
+                "• Dr. High-berzek: operativo · piani in cache",
+                "• SENTINEL: pronto · coda esecuzione vuota",
+                "• RZAI-pulciz: attivo · nessuna anomalia",
+                "• xCLOUD: sincronizzato · replica OK",
+                "• Wallet: online · transazioni recenti verificate"
+              ], 140);
+              break;
+
+            case "reboot system":
+              delayPrint([
+                "[ROOT] Avvio riavvio logico...",
+                "Chiusura sessioni non critiche...",
+                "Pulizia cache e riallineamento stato...",
+                "Sistema riavviato logicamente (simulato)."
+              ], 160);
+              break;
+
+            case "unlock modules":
+              delayPrint([
+                "[ROOT] Sblocco moduli in corso...",
+                "Verifica permessi e chiavi...",
+                "Allineamento policy completato.",
+                "Tutti i moduli risultano sbloccati (simulato)."
+              ], 160);
+              break;
+
+            case "audit deep":
+              delayPrint(auditSummary("deep"), 160);
+              break;
+
+            case "exit":
+              isRoot = false;
+              safePrint("Uscita dalla modalità ROOT. Prompt: xZDOS>");
+              break;
+
+            default:
+              safePrint("[ROOT] Comando non riconosciuto. Digita 'help'.");
+          }
+          return;
+        }
+
+        // Normal mode commands
+        switch(lower){
           case "help":
-            print("Comandi ROOT:");
-            print("- help : mostra i comandi root");
-            print("- stato : stato avanzato moduli");
-            print("- reboot system : riavvio logico simulato");
-            print("- unlock modules : sblocco moduli simulato");
-            print("- exit : esci dalla modalità root");
+            safePrint("Comandi disponibili (EDU · Highkali):");
+            safePrint("- help : mostra i comandi");
+            safePrint("- stato : stato dei moduli");
+            safePrint("- moduli : elenco moduli");
+            safePrint("- diagnostica : esegue diagnostica completa");
+            safePrint("- sentinel status : stato esecutore");
+            safePrint("- berzek plan : genera piano simulato");
+            safePrint("- rzai check : validazione simulata");
+            safePrint("- xcloud sync : sincronizzazione cloud");
+            safePrint("- discord : link al server");
+            safePrint("- xcloud : link al modulo cloud");
+            safePrint("- clear : pulisce il terminale");
+            safePrint("- root override : entra in modalità ROOT (avanzata)");
+            safePrint("- highkali status : stato e spiegazione Highkali");
+            safePrint("- audit deep : esegui audit avanzato (Highkali)");
+            safePrint("- bounty scan : simulazione bounty interno");
+            safePrint("- attack surface : analisi superficie d'attacco");
+            safePrint("- risk vector : valutazione vettori di rischio");
+            safePrint("- vuln entropy : misura entropia vulnerabilità");
+            safePrint("- quantum state : descrizione stato quantistico");
             break;
 
           case "stato":
             delayPrint([
-              "[ROOT] Stato avanzato moduli:",
-              "• Dr. High-berzek: operativo · piani in cache",
-              "• SENTINEL: pronto · coda esecuzione vuota",
-              "• RZAI-pulciz: attivo · nessuna anomalia",
-              "• xCLOUD: sincronizzato · remoto OK",
-              "• Wallet: online · nessun errore"
+              "Raccolta stato moduli...",
+              "• Dr. High-berzek: operativo",
+              "• SENTINEL: in ascolto",
+              "• RZAI-pulciz: attivo",
+              "• xZDOS Wallet: online",
+              "• xCLOUD: sincronizzato"
+            ], 140);
+            break;
+
+          case "moduli":
+            safePrint("Moduli attivi:");
+            safePrint("• xZDOS (agente centrale)");
+            safePrint("• Dr. High-berzek");
+            safePrint("• SENTINEL");
+            safePrint("• RZAI-pulciz");
+            safePrint("• xCLOUD");
+            safePrint("• Wallet");
+            break;
+
+          case "diagnostica":
+            delayPrint([
+              "Avvio diagnostica completa...",
+              "Analisi integrità file...",
+              "Analisi comunicazione moduli...",
+              "Verifica stato repository...",
+              "Verifica sincronizzazione xCLOUD...",
+              "Verifica stato SENTINEL...",
+              "Tutti i sistemi risultano operativi."
+            ], 160);
+            break;
+
+          case "sentinel status":
+            delayPrint([
+              "Interrogazione SENTINEL...",
+              "Modalità: attesa",
+              "Ultima esecuzione: OK",
+              "Errori: nessuno",
+              "Pronto a ricevere nuovi piani."
+            ], 140);
+            break;
+
+          case "berzek plan":
+            delayPrint([
+              "Generazione piano da Dr. High-berzek...",
+              "Analisi repository...",
+              "Valutazione stato...",
+              "Piano generato:",
+              "1. Validazione RZAI",
+              "2. Esecuzione SENTINEL",
+              "3. Aggiornamento stato xZDOS"
             ], 150);
             break;
 
-          case "reboot system":
+          case "rzai check":
             delayPrint([
-              "[ROOT] Avvio riavvio logico...",
-              "Chiusura sessioni...",
-              "Pulizia cache...",
-              "Riallineamento stato...",
-              "Sistema riavviato logicamente (simulato)."
-            ], 180);
+              "RZAI-pulciz in esecuzione...",
+              "Controllo integrità...",
+              "Controllo struttura...",
+              "Controllo sicurezza...",
+              "Risultato: nessuna anomalia rilevata."
+            ], 140);
             break;
 
-          case "unlock modules":
+          case "xcloud sync":
             delayPrint([
-              "[ROOT] Sblocco moduli...",
-              "Verifica permessi...",
-              "Allineamento chiavi...",
-              "Tutti i moduli risultano sbloccati (simulato)."
-            ], 180);
+              "Connessione a xCLOUD...",
+              "Sincronizzazione moduli...",
+              "Aggiornamento stato remoto...",
+              "xCLOUD sincronizzato correttamente."
+            ], 140);
             break;
 
-          case "exit":
-            isRoot = false;
-            print("Uscita dalla modalità ROOT. Prompt: xZDOS>");
+          case "discord":
+            safePrint("Server Discord:");
+            safePrint("<a href='https://discord.gg/9fDdURTevG' target='_blank' rel='noopener'>Apri Discord</a>");
+            break;
+
+          case "xcloud":
+            safePrint("Repository xCLOUD:");
+            safePrint("<a href='https://github.com/high-cde/xCLOUD-by-zdos' target='_blank' rel='noopener'>Apri xCLOUD</a>");
+            break;
+
+          case "clear":
+            clearTerminal();
+            break;
+
+          case "root override":
+            isRoot = true;
+            safePrint("Modalità ROOT attivata. Prompt: xZDOS#");
+            safePrint("Digita 'help' per i comandi root, 'exit' per uscire.");
+            break;
+
+          // Highkali-specific commands (EDU + cybersec)
+          case "highkali status":
+            delayPrint([
+              "Highkali — stato operativo:",
+              "• Modalità: ibrida (osservatore · operatore · architetto)",
+              "• Ultimo audit: 2 ore fa (nessuna anomalia critica)",
+              "• Bounty queue: 3 segnalazioni in revisione",
+              "• Raccomandazioni: aggiornare policy input validation"
+            ], 140);
+            break;
+
+          case "audit deep":
+            delayPrint(auditSummary("deep"), 150);
+            break;
+
+          case "bounty scan":
+            delayPrint([
+              "Esecuzione bounty scan (simulato)...",
+              "Mappatura surface: 12 endpoint critici identificati",
+              "Priorità assegnata: 3 high, 5 medium, 4 low",
+              "Suggerimento EDU: documentare CVE-like findings e seguire disclosure policy"
+            ], 150);
+            break;
+
+          case "attack surface":
+            delayPrint([
+              "Analisi superficie d'attacco in corso...",
+              "Endpoint esposti: /api/auth, /api/upload, /admin",
+              "Vettori rilevati: input validation, auth misconfig, rate limiting",
+              "Raccomandazione: applicare WAF rules e review autenticazione"
+            ], 150);
+            break;
+
+          case "risk vector":
+            delayPrint([
+              "Valutazione vettori di rischio...",
+              "Vettore 1: autenticazione debole (probabilità media · impatto alto)",
+              "Vettore 2: input validation mancante (probabilità alta · impatto medio)",
+              "Mitigazioni: MFA, sanitizzazione input, test di regressione"
+            ], 150);
+            break;
+
+          case "vuln entropy":
+            delayPrint([
+              "Calcolo entropia delle vulnerabilità...",
+              "Metriche raccolte: varietà, frequenza, impatto",
+              "Entropia risultante: 0.27 (bassa) — sistema relativamente stabile",
+              "Nota EDU: entropia bassa non esclude vulnerabilità critiche; continuare monitoraggio"
+            ], 150);
+            break;
+
+          case "observer collapse":
+            delayPrint([
+              "Esecuzione observer collapse (simulazione)...",
+              "Selezione funzione operativa richiesta...",
+              "Collasso completato: Highkali assume stato 'Operatore' per intervento mirato."
+            ], 160);
+            break;
+
+          case "quantum state":
+            delayPrint([
+              "Descrizione stato quantistico (Highkali):",
+              "Superposizione: {Osservatore:0.45, Operatore:0.35, Architetto:0.20}",
+              "Osservazioni: trend di stabilità; suggerita revisione policy di accesso per ridurre rischio."
+            ], 150);
             break;
 
           default:
-            print("[ROOT] Comando non riconosciuto. Digita 'help'.");
+            safePrint("Comando non riconosciuto. Digita 'help'.");
         }
-        return;
-      }
+      });
 
-      // Modalità normale
-      switch(lower) {
+      // Focus input on load
+      input.focus();
 
-        case "help":
-          print("Comandi disponibili:");
-          print("- help : mostra i comandi");
-          print("- stato : stato dei moduli");
-          print("- moduli : elenco moduli");
-          print("- diagnostica : esegue diagnostica completa");
-          print("- sentinel status : stato esecutore");
-          print("- berzek plan : genera piano simulato");
-          print("- rzai check : validazione simulata");
-          print("- xcloud sync : sincronizzazione cloud");
-          print("- discord : link al server");
-          print("- xcloud : link al modulo cloud");
-          print("- clear : pulisce il terminale");
-          print("- root override : entra in modalità ROOT (avanzata)");
-          break;
-
-        case "stato":
-          delayPrint([
-            "Raccolta stato moduli...",
-            "• Dr. High-berzek: operativo",
-            "• SENTINEL: in ascolto",
-            "• RZAI-pulciz: attivo",
-            "• xZDOS Wallet: online",
-            "• xCLOUD: sincronizzato"
-          ], 150);
-          break;
-
-        case "moduli":
-          print("Moduli attivi:");
-          print("• xZDOS (agente centrale)");
-          print("• Dr. High-berzek");
-          print("• SENTINEL");
-          print("• RZAI-pulciz");
-          print("• xCLOUD");
-          print("• Wallet");
-          break;
-
-        case "diagnostica":
-          delayPrint([
-            "Avvio diagnostica completa...",
-            "Analisi integrità file...",
-            "Analisi comunicazione moduli...",
-            "Verifica stato repository...",
-            "Verifica sincronizzazione xCLOUD...",
-            "Verifica stato SENTINEL...",
-            "Tutti i sistemi risultano operativi."
-          ], 180);
-          break;
-
-        case "sentinel status":
-          delayPrint([
-            "Interrogazione SENTINEL...",
-            "Modalità: attesa",
-            "Ultima esecuzione: OK",
-            "Errori: nessuno",
-            "Pronto a ricevere nuovi piani."
-          ], 160);
-          break;
-
-        case "berzek plan":
-          delayPrint([
-            "Generazione piano da Dr. High-berzek...",
-            "Analisi repository...",
-            "Valutazione stato...",
-            "Piano generato:",
-            "1. Validazione RZAI",
-            "2. Esecuzione SENTINEL",
-            "3. Aggiornamento stato xZDOS"
-          ], 170);
-          break;
-
-        case "rzai check":
-          delayPrint([
-            "RZAI-pulciz in esecuzione...",
-            "Controllo integrità...",
-            "Controllo struttura...",
-            "Controllo sicurezza...",
-            "Risultato: nessuna anomalia rilevata."
-          ], 150);
-          break;
-
-        case "xcloud sync":
-          delayPrint([
-            "Connessione a xCLOUD...",
-            "Sincronizzazione moduli...",
-            "Aggiornamento stato remoto...",
-            "xCLOUD sincronizzato correttamente."
-          ], 150);
-          break;
-
-        case "discord":
-          print("Server Discord:");
-          print("<a href='https://discord.gg/9fDdURTevG' target='_blank'>Apri Discord</a>");
-          break;
-
-        case "xcloud":
-          print("Repository xCLOUD:");
-          print("<a href='https://github.com/high-cde/xCLOUD-by-zdos' target='_blank'>Apri xCLOUD</a>");
-          break;
-
-        case "clear":
-          output.innerHTML = "xZDOS> Terminale pulito.";
-          break;
-
-        case "root override":
-          isRoot = true;
-          print("Modalità ROOT attivata. Prompt: xZDOS#");
-          print("Digita 'help' per i comandi root, 'exit' per uscire.");
-          break;
-
-        default:
-          print("Comando non riconosciuto. Digita 'help'.");
-      }
-    }
-  });
-</script>
-
+      // Accessibility: allow clicking terminal to focus input
+      terminal.addEventListener("click", () => input.focus());
+    })();
+  </script>
 </body>
 </html>
+
