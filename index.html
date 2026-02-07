@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -143,10 +142,9 @@
   <!-- Agente xZDOS -->
   <h2 class="section-title">Agente xZDOS</h2>
   <p class="section-text">
-    L’agente xZDOS è il nucleo dell’intero ecosistema.  
-    Coordina, osserva, registra e mantiene la coerenza del sistema.  
+    L’agente xZDOS è il nucleo dell’intero ecosistema.
+    Coordina, osserva, registra e mantiene la coerenza del sistema.
     È il punto di accesso principale, la mente che collega tutti i moduli e supervisiona l’evoluzione dell’infrastruttura.
-    <br><br>
     xZDOS non è un semplice modulo: è l’identità del sistema, il suo centro di gravità.
   </p>
 
@@ -190,7 +188,7 @@
   <!-- xCLOUD -->
   <h2 class="section-title">xCLOUD · Modulo Cloud dell’Ecosistema</h2>
   <p class="section-text">
-    xCLOUD è il modulo cloud‑native dell’ecosistema xZDOS.  
+    xCLOUD è il modulo cloud‑native dell’ecosistema xZDOS.
     Raccoglie, struttura e gestisce risorse distribuite, offrendo un livello superiore di astrazione e potenza.
   </p>
 
@@ -203,7 +201,7 @@
   <!-- Discord -->
   <h2 class="section-title">Server Discord Ufficiale</h2>
   <p class="section-text">
-    Il centro comunicativo dell’ecosistema.  
+    Il centro comunicativo dell’ecosistema.
     Qui avvengono discussioni, aggiornamenti, test e coordinamento.
   </p>
 
@@ -245,11 +243,250 @@
 
   </div>
 
+  <!-- TERMINALE INTERATTIVO xZDOS -->
+  <h2 class="section-title">Terminale Interattivo xZDOS</h2>
+  <p class="section-text">
+    Interfaccia diretta con l’agente xZDOS.  
+    Digita <code>help</code> per i comandi disponibili.  
+    Esiste anche una modalità <strong>root</strong> nascosta.
+  </p>
+
+  <div id="terminal" style="
+    background:#000;
+    color:#00eaff;
+    padding:20px;
+    border-radius:10px;
+    font-family: monospace;
+    height:300px;
+    overflow-y:auto;
+    border:1px solid #00eaff55;
+    box-shadow:0 0 15px #00eaff33;
+  ">
+    <div id="terminal-output">xZDOS> Terminale inizializzato. Digita 'help' per i comandi disponibili.</div>
+  </div>
+
+  <input id="terminal-input" type="text" placeholder="Inserisci comando..."
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    background:#0a0a0a;
+    border:1px solid #00eaff55;
+    border-radius:8px;
+    color:#00eaff;
+    font-family:monospace;
+    outline:none;
+  ">
+
 </div>
 
 <footer>
   © xZDOS · Sistema modulare · Architettura distribuita · Evoluzione continua
 </footer>
+
+<script>
+  const output = document.getElementById("terminal-output");
+  const input = document.getElementById("terminal-input");
+  const terminal = document.getElementById("terminal");
+
+  let isRoot = false;
+
+  function print(text) {
+    output.innerHTML += "<br>" + text;
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  function delayPrint(lines, delay = 200) {
+    let i = 0;
+    const interval = setInterval(() => {
+      print(lines[i]);
+      i++;
+      if (i >= lines.length) clearInterval(interval);
+    }, delay);
+  }
+
+  input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      const raw = input.value;
+      const cmd = raw.trim();
+      if (!cmd) return;
+      print((isRoot ? "xZDOS# " : "xZDOS> ") + cmd);
+      input.value = "";
+
+      const lower = cmd.toLowerCase();
+
+      // Modalità ROOT: comandi speciali
+      if (isRoot) {
+        switch(lower) {
+          case "help":
+            print("Comandi ROOT:");
+            print("- help : mostra i comandi root");
+            print("- stato : stato avanzato moduli");
+            print("- reboot system : riavvio logico simulato");
+            print("- unlock modules : sblocco moduli simulato");
+            print("- exit : esci dalla modalità root");
+            break;
+
+          case "stato":
+            delayPrint([
+              "[ROOT] Stato avanzato moduli:",
+              "• Dr. High-berzek: operativo · piani in cache",
+              "• SENTINEL: pronto · coda esecuzione vuota",
+              "• RZAI-pulciz: attivo · nessuna anomalia",
+              "• xCLOUD: sincronizzato · remoto OK",
+              "• Wallet: online · nessun errore"
+            ], 150);
+            break;
+
+          case "reboot system":
+            delayPrint([
+              "[ROOT] Avvio riavvio logico...",
+              "Chiusura sessioni...",
+              "Pulizia cache...",
+              "Riallineamento stato...",
+              "Sistema riavviato logicamente (simulato)."
+            ], 180);
+            break;
+
+          case "unlock modules":
+            delayPrint([
+              "[ROOT] Sblocco moduli...",
+              "Verifica permessi...",
+              "Allineamento chiavi...",
+              "Tutti i moduli risultano sbloccati (simulato)."
+            ], 180);
+            break;
+
+          case "exit":
+            isRoot = false;
+            print("Uscita dalla modalità ROOT. Prompt: xZDOS>");
+            break;
+
+          default:
+            print("[ROOT] Comando non riconosciuto. Digita 'help'.");
+        }
+        return;
+      }
+
+      // Modalità normale
+      switch(lower) {
+
+        case "help":
+          print("Comandi disponibili:");
+          print("- help : mostra i comandi");
+          print("- stato : stato dei moduli");
+          print("- moduli : elenco moduli");
+          print("- diagnostica : esegue diagnostica completa");
+          print("- sentinel status : stato esecutore");
+          print("- berzek plan : genera piano simulato");
+          print("- rzai check : validazione simulata");
+          print("- xcloud sync : sincronizzazione cloud");
+          print("- discord : link al server");
+          print("- xcloud : link al modulo cloud");
+          print("- clear : pulisce il terminale");
+          print("- root override : entra in modalità ROOT (avanzata)");
+          break;
+
+        case "stato":
+          delayPrint([
+            "Raccolta stato moduli...",
+            "• Dr. High-berzek: operativo",
+            "• SENTINEL: in ascolto",
+            "• RZAI-pulciz: attivo",
+            "• xZDOS Wallet: online",
+            "• xCLOUD: sincronizzato"
+          ], 150);
+          break;
+
+        case "moduli":
+          print("Moduli attivi:");
+          print("• xZDOS (agente centrale)");
+          print("• Dr. High-berzek");
+          print("• SENTINEL");
+          print("• RZAI-pulciz");
+          print("• xCLOUD");
+          print("• Wallet");
+          break;
+
+        case "diagnostica":
+          delayPrint([
+            "Avvio diagnostica completa...",
+            "Analisi integrità file...",
+            "Analisi comunicazione moduli...",
+            "Verifica stato repository...",
+            "Verifica sincronizzazione xCLOUD...",
+            "Verifica stato SENTINEL...",
+            "Tutti i sistemi risultano operativi."
+          ], 180);
+          break;
+
+        case "sentinel status":
+          delayPrint([
+            "Interrogazione SENTINEL...",
+            "Modalità: attesa",
+            "Ultima esecuzione: OK",
+            "Errori: nessuno",
+            "Pronto a ricevere nuovi piani."
+          ], 160);
+          break;
+
+        case "berzek plan":
+          delayPrint([
+            "Generazione piano da Dr. High-berzek...",
+            "Analisi repository...",
+            "Valutazione stato...",
+            "Piano generato:",
+            "1. Validazione RZAI",
+            "2. Esecuzione SENTINEL",
+            "3. Aggiornamento stato xZDOS"
+          ], 170);
+          break;
+
+        case "rzai check":
+          delayPrint([
+            "RZAI-pulciz in esecuzione...",
+            "Controllo integrità...",
+            "Controllo struttura...",
+            "Controllo sicurezza...",
+            "Risultato: nessuna anomalia rilevata."
+          ], 150);
+          break;
+
+        case "xcloud sync":
+          delayPrint([
+            "Connessione a xCLOUD...",
+            "Sincronizzazione moduli...",
+            "Aggiornamento stato remoto...",
+            "xCLOUD sincronizzato correttamente."
+          ], 150);
+          break;
+
+        case "discord":
+          print("Server Discord:");
+          print("<a href='https://discord.gg/9fDdURTevG' target='_blank'>Apri Discord</a>");
+          break;
+
+        case "xcloud":
+          print("Repository xCLOUD:");
+          print("<a href='https://github.com/high-cde/xCLOUD-by-zdos' target='_blank'>Apri xCLOUD</a>");
+          break;
+
+        case "clear":
+          output.innerHTML = "xZDOS> Terminale pulito.";
+          break;
+
+        case "root override":
+          isRoot = true;
+          print("Modalità ROOT attivata. Prompt: xZDOS#");
+          print("Digita 'help' per i comandi root, 'exit' per uscire.");
+          break;
+
+        default:
+          print("Comando non riconosciuto. Digita 'help'.");
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
