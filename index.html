@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -82,6 +83,23 @@
       font-size: 1.4rem;
     }
 
+    .button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: #00eaff22;
+      border: 1px solid #00eaff55;
+      border-radius: 8px;
+      color: #00eaff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: #00eaff44;
+      border-color: #00eaff;
+    }
+
     footer {
       margin-top: 80px;
       padding: 30px;
@@ -89,15 +107,6 @@
       font-size: 0.9rem;
       opacity: 0.6;
       border-top: 1px solid #222;
-    }
-
-    a {
-      color: #00eaff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
     }
 
     .timeline {
@@ -131,69 +140,78 @@
 
 <div class="container">
 
-  <!-- Filosofia -->
-  <h2 class="section-title">Filosofia del Sistema</h2>
+  <!-- Agente xZDOS -->
+  <h2 class="section-title">Agente xZDOS</h2>
   <p class="section-text">
-    xZDOS nasce come un ecosistema operativo distribuito, progettato per orchestrare, validare e mantenere
-    un insieme di moduli intelligenti che collaborano tra loro. Ogni componente è autonomo, ma parte di un
-    disegno più grande: un sistema che evolve, si adatta, si auto‑analizza e mantiene la propria integrità
-    attraverso cicli continui di supervisione e riparazione.
+    L’agente xZDOS è il nucleo dell’intero ecosistema.  
+    Coordina, osserva, registra e mantiene la coerenza del sistema.  
+    È il punto di accesso principale, la mente che collega tutti i moduli e supervisiona l’evoluzione dell’infrastruttura.
+    <br><br>
+    xZDOS non è un semplice modulo: è l’identità del sistema, il suo centro di gravità.
   </p>
 
+  <div class="card">
+    <h3>Funzioni principali dell’agente xZDOS</h3>
+    <p>• Coordinamento globale dei moduli</p>
+    <p>• Supervisione dello stato operativo</p>
+    <p>• Gestione identità e struttura dell’ecosistema</p>
+    <p>• Punto di accesso per moduli esterni</p>
+    <p>• Visione unificata del sistema</p>
+  </div>
+
   <!-- Moduli -->
-  <h2 class="section-title">Moduli Principali</h2>
+  <h2 class="section-title">Moduli dell’Ecosistema</h2>
 
   <div class="grid">
 
     <div class="card">
       <h3>Dr. High‑berzek</h3>
-      <p>
-        L’orchestratore supremo. Analizza repository, genera piani, aggiorna lo stato operativo e mantiene
-        la memoria del sistema. È il cervello strategico dell’ecosistema.
-      </p>
-      <p><strong>Funzioni chiave:</strong> pianificazione, analisi, stato, priorità.</p>
+      <p>Orchestratore strategico. Analisi, piani, stato operativo, memoria persistente.</p>
     </div>
 
     <div class="card">
       <h3>SENTINEL</h3>
-      <p>
-        Il modulo esecutivo. Riceve i piani da Dr. High‑berzek, li esegue, monitora gli errori e attiva
-        procedure di auto‑riparazione. È il braccio operativo del sistema.
-      </p>
-      <p><strong>Funzioni chiave:</strong> esecuzione, fallback, monitoraggio.</p>
+      <p>Modulo esecutivo. Applica piani, gestisce errori, attiva auto‑riparazione.</p>
     </div>
 
     <div class="card">
       <h3>RZAI‑pulciz</h3>
-      <p>
-        Il validatore. Controlla integrità, coerenza, sicurezza e struttura dei repository. Segnala anomalie
-        e supporta la supervisione.
-      </p>
-      <p><strong>Funzioni chiave:</strong> validazione, sicurezza, notifiche.</p>
+      <p>Validatore. Controllo integrità, sicurezza, coerenza strutturale.</p>
     </div>
 
     <div class="card">
       <h3>xZDOS Wallet</h3>
-      <p>
-        Modulo dedicato alla gestione wallet dell’ecosistema. Interfaccia separata, sicura e modulare.
-      </p>
-      <p><a href="https://wallet.x-zdos.it">Apri wallet.x-zdos.it</a></p>
+      <p>Modulo dedicato alla gestione wallet.</p>
+      <a class="button" href="https://wallet.x-zdos.it">Apri wallet</a>
     </div>
 
   </div>
 
-  <!-- Architettura -->
-  <h2 class="section-title">Architettura Tecnica</h2>
+  <!-- xCLOUD -->
+  <h2 class="section-title">xCLOUD · Modulo Cloud dell’Ecosistema</h2>
   <p class="section-text">
-    L’ecosistema è costruito su una logica a livelli:
-    <br><br>
-    <strong>• Livello 1 — Orchestrazione:</strong> Dr. High‑berzek genera piani e aggiorna lo stato.<br>
-    <strong>• Livello 2 — Esecuzione:</strong> SENTINEL applica i piani e gestisce gli errori.<br>
-    <strong>• Livello 3 — Validazione:</strong> RZAI‑pulciz controlla integrità e sicurezza.<br>
-    <strong>• Livello 4 — Interfacce:</strong> moduli come wallet.x-zdos.it espongono funzionalità specifiche.<br>
-    <br>
-    Ogni livello comunica tramite file JSON, code di esecuzione e stati persistenti.
+    xCLOUD è il modulo cloud‑native dell’ecosistema xZDOS.  
+    Raccoglie, struttura e gestisce risorse distribuite, offrendo un livello superiore di astrazione e potenza.
   </p>
+
+  <div class="card">
+    <h3>Repository ufficiale xCLOUD</h3>
+    <p>Contiene la logica cloud, i moduli remoti e le estensioni future.</p>
+    <a class="button" href="https://github.com/high-cde/xCLOUD-by-zdos">Apri xCLOUD su GitHub</a>
+  </div>
+
+  <!-- Discord -->
+  <h2 class="section-title">Server Discord Ufficiale</h2>
+  <p class="section-text">
+    Il centro comunicativo dell’ecosistema.  
+    Qui avvengono discussioni, aggiornamenti, test e coordinamento.
+  </p>
+
+  <div class="card">
+    <h3>Unisciti alla community</h3>
+    <p>Accesso diretto al server ufficiale xZDOS.</p>
+    <a class="button" href="https://discord.gg/9fDdURTevG">Entra nel server Discord</a>
+  </div>
 
   <!-- Timeline -->
   <h2 class="section-title">Timeline Evolutiva</h2>
@@ -202,7 +220,7 @@
 
     <div class="timeline-entry">
       <h4>Fase 1 — Fondazione</h4>
-      <p>Creazione dei repository base e definizione dell’ecosistema xZDOS.</p>
+      <p>Creazione dei repository base e definizione dell’identità xZDOS.</p>
     </div>
 
     <div class="timeline-entry">
@@ -212,12 +230,17 @@
 
     <div class="timeline-entry">
       <h4>Fase 3 — Supervisione</h4>
-      <p>Integrazione di SENTINEL e RZAI‑pulciz come moduli di controllo e validazione.</p>
+      <p>Integrazione di SENTINEL e RZAI‑pulciz.</p>
     </div>
 
     <div class="timeline-entry">
       <h4>Fase 4 — Espansione</h4>
-      <p>Creazione di wallet.x-zdos.it e moduli futuri dell’ecosistema.</p>
+      <p>Creazione di xCLOUD e wallet.x-zdos.it.</p>
+    </div>
+
+    <div class="timeline-entry">
+      <h4>Fase 5 — Identità</h4>
+      <p>Introduzione dell’agente xZDOS come centro dell’ecosistema.</p>
     </div>
 
   </div>
