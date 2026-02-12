@@ -3,12 +3,12 @@ mkdir -p agents
 cat <<JSON > agents/feed.json
 [
   {
-    "time": "23:38:18",
+    "time": "23:39:22",
     "agent": "XZDOS_AOA",
     "message": "Terminale xCLOUD operativo. Nessuna minaccia rilevata."
   },
   {
-    "time": "23:38:18",
+    "time": "23:39:22",
     "agent": "AGENT_KALI",
     "message": "Z-AI_AOA sincronizzato. Stato: stabile."
   }
