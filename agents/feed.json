@@ -1,4 +1,12 @@
 [
-  {"time": "23:37:27", "agent": "AGENT_KALI", "message": "Heartbeat OK"},
-  {"time": "23:37:27", "agent": "AGENT_SENTINEL", "message": "Scan complete. No threats."}
+  {
+    "time": "23:37:00",
+    "agent": "XZDOS_AOA",
+    "message": "Terminale xCLOUD operativo. Nessuna minaccia rilevata."
+  },
+  {
+    "time": "23:37:05",
+    "agent": "AGENT_KALI",
+    "message": "Z-AI_AOA sincronizzato. Stato: stabile."
+  }
 ]
